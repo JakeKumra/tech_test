@@ -38,6 +38,6 @@ Simplification for the task:
 
 ### Server
 - Open a new terminal window or tab
-- `cd server` (or the folder containing `index.js`)
+- `cd server`
 - `npm i`
 - `node index.js`
