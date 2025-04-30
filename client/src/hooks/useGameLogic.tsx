@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { XorO } from "../types"
+import { checkRowWinner, checkColumnWinner, checkDiagonalWinner, checkAntiDiagonalWinner, checkDraw } from "../utils/gameUtils"
 
 export const useGameLogic = (boardSize: number | null, updateWinnerWinCount: (winnerName: string) => void) => {
   const [board, setBoard] = useState<(XorO | undefined)[][]>([])
@@ -20,23 +21,15 @@ export const useGameLogic = (boardSize: number | null, updateWinnerWinCount: (wi
   ): boolean => {
     const boardSize = board.length
 
-    // check row winner
-    if (board[rowIndex].every(cell => cell === player)) return true
+    if (checkRowWinner(board, rowIndex, player)) return true;
 
-    // check column winner
-    if (board.every(row => row[colIndex] === player)) return true
+    if (checkColumnWinner(board, colIndex, player)) return true;
 
-    // check diagonal winner
-    if (rowIndex === colIndex && board.every((row, index) => row[index] === player)) return true
+    if (checkDiagonalWinner(board, rowIndex, colIndex, player)) return true;
 
-    // check anti-diagonal winner
-    if (rowIndex + colIndex === boardSize - 1 && board.every((row, index) => row[boardSize - 1 - index] === player)) return true
+    if (checkAntiDiagonalWinner(board, rowIndex, colIndex, player, boardSize)) return true;
 
     return false
-  }
-
-  const checkDraw = (board: (XorO | undefined)[][]): boolean => {
-    return board.every(row => row.every(cell => cell !== undefined)) && !winner
   }
 
   const handleCellClick = (rowIndex: number, colIndex: number) => {
@@ -55,7 +48,7 @@ export const useGameLogic = (boardSize: number | null, updateWinnerWinCount: (wi
       return
     }
   
-    if (checkDraw(updatedBoard)) {
+    if (checkDraw(updatedBoard, winner)) {
       setBoard(updatedBoard)
       setIsDraw(true)
       return
