@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLeaderboard } from '../hooks/useLeaderboard' // Update path if needed
+import { useLeaderboard } from '../hooks/useLeaderboard'
 import { XorO } from '../types'
 
 export const Leaderboard = ({winner}: {winner: XorO | null}) => {

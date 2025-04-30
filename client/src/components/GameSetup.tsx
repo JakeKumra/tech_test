@@ -18,7 +18,7 @@ export const GameSetup = ({
   inputSize,
   setInputSize,
   handleSubmit,
-}) => {
+}: GameSetupProps) => {
   return (
     <div className="flex flex-col items-center mt-10 gap-6">
       <div className="text-3xl font-semibold text-center mb-4">Set Up Game</div>

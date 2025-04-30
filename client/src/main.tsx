@@ -4,7 +4,7 @@ import { useGameLogic } from "./hooks/useGameLogic"
 import { addUser, updateUserWinCount } from "./api/userApi"
 import GameStatus from "./components/GameStatus"
 import { GameBoard } from "./components/GameBoard"
-import { GameSetup } from "./components/GameSetup" // Import the new component
+import { GameSetup } from "./components/GameSetup"
 
 export const Main = () => {
   const [inputSize, setInputSize] = useState("")
