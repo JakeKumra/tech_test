@@ -35,3 +35,9 @@ Simplification for the task:
 - `cd client`
 - `npm i`
 - `npm start`
+
+### Server
+- Open a new terminal window or tab
+- `cd server`
+- `npm i`
+- `node index.js`
