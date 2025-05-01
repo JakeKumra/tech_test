@@ -25,7 +25,7 @@ export const useLeaderboard = (winner: XorO | null) => {
     }
 
     fetchLeaderboardData()
-  }, [winner]) // Re-fetch leaderboard when leaderboardKey changes
+  }, [winner]) 
 
   return { leaderboard, loading, error }
 }

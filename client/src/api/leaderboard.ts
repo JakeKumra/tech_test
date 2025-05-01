@@ -1,4 +1,4 @@
-import { API_URL } from "./constants/baseUrl";
+import { API_URL } from "./baseUrl";
 
 export const fetchLeaderboard = async () => {
   try {
