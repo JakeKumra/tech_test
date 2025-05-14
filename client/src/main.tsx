@@ -31,12 +31,16 @@ export const Main = () => {
     const size = parseInt(inputSize);
 
     if (containsValidInputs(size, player1Name, player2Name)) {
-      await addUser(player1Name);
-      await addUser(player2Name);
+      try {
+        await addUser(player1Name);
+        await addUser(player2Name);
 
-      setPlayers({ X: player1Name, O: player2Name });
-      setBoardSize(size);
-      setBoard(createEmptyBoard(size));
+        setPlayers({ X: player1Name, O: player2Name });
+        setBoardSize(size);
+        setBoard(createEmptyBoard(size));
+      } catch (error) {
+        console.error("Error during user creation:", error);
+      }
     }
   };
 

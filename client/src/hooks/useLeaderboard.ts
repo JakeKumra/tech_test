@@ -1,32 +1,31 @@
-import { useEffect, useState } from 'react'
-import { fetchLeaderboard } from '../api/leaderboard'
-import { XorO } from '../types'
+import { useEffect, useState } from "react";
+import { fetchLeaderboard } from "../api/leaderboard";
+import { XorO } from "../types";
 
 export type LeaderboardEntry = {
-  name: string
-  wins: number
-}
+  name: string;
+  wins: number;
+};
 
 export const useLeaderboard = (winner: XorO | null) => {
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<null | string>(null)
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
-    const fetchLeaderboardData = async () => { 
+    const fetchLeaderboardData = async () => {
       try {
-        const data = await fetchLeaderboard() 
-        setLeaderboard(data)
+        const data = await fetchLeaderboard();
+        setLeaderboard(data);
       } catch (err: any) {
-        setError(err.message)
+        setError(err.message);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchLeaderboardData()
-  }, [winner]) 
+    fetchLeaderboardData();
+  }, [winner]);
 
-  return { leaderboard, loading, error }
-}
-
+  return { leaderboard, loading, error };
+};
