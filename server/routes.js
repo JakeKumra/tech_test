@@ -1,32 +1,38 @@
-const express = require('express');
-const db = require('./db');
+const express = require("express");
+const db = require("./db");
 
 const router = express.Router();
 
-router.post('/users', (req, res) => {
+router.post("/users", async (req, res) => {
   const { name } = req.body;
-  if (!name) return res.status(400).json({ message: 'Name is required' });
+  if (!name) return res.status(400).json({ message: "Name is required" });
 
-  db.addUser(name, (err, userId) => {
-    if (err) return res.status(500).json({ message: 'Error adding user' });
+  try {
+    const userId = await db.addUser(name);
     res.json({ id: userId, name });
-  });
+  } catch (err) {
+    res.status(500).json({ message: "Error adding user" });
+  }
 });
 
-router.get('/leaderboard', (req, res) => {
-  db.getLeaderboard((err, rows) => {
-    if (err) return res.status(500).json({ message: 'Error fetching leaderboard' });
-    res.json(rows);
-  });
+router.get("/leaderboard", async (req, res) => {
+  try {
+    const leaderboard = await db.getLeaderboard();
+    res.json(leaderboard);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching leaderboard" });
+  }
 });
 
-router.post('/users/:name/win', (req, res) => {
+router.post("/users/:name/win", async (req, res) => {
   const { name } = req.params;
 
-  db.updateWinCount(name, (err) => {
-    if (err) return res.status(500).json({ message: 'Error updating win count' });
-    res.json({ message: 'Win recorded' });
-  });
+  try {
+    await db.updateWinCount(name);
+    res.json({ message: "Win recorded" });
+  } catch (err) {
+    res.status(500).json({ message: "Error updating win count" });
+  }
 });
 
 module.exports = router;

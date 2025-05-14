@@ -93,5 +93,5 @@ const containsValidInputs = (
   player1Name: string,
   player2Name: string
 ) => {
-  return !isNaN(size) && size >= 3 && player1Name && player2Name;
+  return !isNaN(size) && size >= 3 && size <= 15 && player1Name && player2Name;
 };
